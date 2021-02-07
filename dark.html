@@ -225,43 +225,33 @@
 
   playlist.load([
     {
-      "src": "media/audio/Vocals30.mp3",
-      "name": "Vocals",
-      "fadeIn": {
-        "duration": 0.5
-      },
-      "fadeOut": {
-        "duration": 0.5
-      },
-      "cuein": 5.918,
-      "cueout": 14.5,
+      "src": "media/audio/1.mp3",
+      "name": "Some Long Title",
     },
     {
-      "src": "media/audio/BassDrums30.mp3",
-      "name": "Drums",
-      "start": 8.5,
+      "src": "media/audio/Longer Title Check.mp3",
+      "name": "Another Test",
+      "start": 22,
+      "gain": 0.4,
       "fadeIn": {
-        "shape": "logarithmic",
-        "duration": 0.5
+        "duration": 4
       },
-      "fadeOut": {
-        "shape": "logarithmic",
-        "duration": 0.5
-      }
     },
     {
-      "src": "media/audio/Guitar30.mp3",
-      "name": "Guitar",
-      "start": 23.5,
+      "src": "media/audio/Soem Title.mp3",
+      "name": "Last Title Test",
+      "start": 44,
+      "gain": 0.6,
+      "cueout": 64,
       "fadeOut": {
-        "shape": "linear",
-        "duration": 0.5
+        "duration": 2
       },
-      "cuein": 15
-    }
+    },
+    {
+      "src": "media/audio/2.mp3",
+      "name": "Test",
+    },
   ]).then(function() {
-    //can do stuff with the playlist.
-
     //initialize the WAV exporter.
     playlist.initExporter();
   });
