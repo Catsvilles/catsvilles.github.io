@@ -127,7 +127,16 @@ $container.on("click", ".btn-loop", function() {
 $container.on("click", ".btn-play", function() {
   ee.emit("play");
 });
-
+$(window).keypress(function(e) {
+    if (e.which === 32) {
+      if (playlist.isPlaying()) {
+        isLooping = false;
+        ee.emit("pause");
+      } else {
+        ee.emit("play");
+      }
+    }
+});
 $container.on("click", ".btn-pause", function() {
   isLooping = false;
   ee.emit("pause");

@@ -118,7 +118,7 @@ var WaveformPlaylist =
 	      linkEndpoints: false,
 	      isContinuousPlay: false
 	    },
-	    isAutomaticScroll: false
+	    isAutomaticScroll: true
 	  };
 
 	  var config = (0, _lodash2.default)(defaults, options);
@@ -1939,6 +1939,13 @@ var WaveformPlaylist =
 	        _this2.drawRequest();
 	      });
 
+				ee.on('deletetrack', function (track) {
+					_this2.stop();
+					_this2.clearTrack(track);
+					_this2.adjustTrackPlayout();
+					_this2.drawRequest();
+				});
+
 	      ee.on('volumechange', function (volume, track) {
 	        track.setGainLevel(volume / 100);
 	      });
@@ -2468,6 +2475,26 @@ var WaveformPlaylist =
 	        _this11.scrollLeft = 0;
 
 	        _this11.seek(0, 0, undefined);
+	      });
+	    }
+	  },{
+	    key: 'clearTrack',
+	    value: function clearTrack(track) {
+	      var _this11 = this;
+				var index=_this11.tracks.indexOf(track);
+					function array_move(arr, old_index, new_index) {
+						if (new_index >= arr.length) {
+								var k = new_index - arr.length + 1;
+								while (k--) {
+										arr.push(undefined);
+								}
+						}
+						arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+						return arr; // for testing
+					};
+					array_move(_this11.tracks, index, _this11.tracks.length-1);
+					_this11.tracks.pop();
+	      return this.stop().then(function () {
 	      });
 	    }
 	  }, {
@@ -5952,6 +5979,7 @@ var WaveformPlaylist =
 
 	      var muteClass = data.muted ? '.active' : '';
 	      var soloClass = data.soloed ? '.active' : '';
+				var deleteClass = data.deleted ? '.active': '';
 	      var numChan = this.peaks.data.length;
 
 	      return (0, _h2.default)('div.controls', {
@@ -5966,7 +5994,11 @@ var WaveformPlaylist =
 	        onclick: function onclick() {
 	          _this2.ee.emit('solo', _this2);
 	        }
-	      }, ['Solo'])]), (0, _h2.default)('label', [(0, _h2.default)('input.volume-slider', {
+				}, ['Solo']), (0, _h2.default)('span.leading-none.rounded.py-1.px-2.neumorphism-shadow.neumorphism-inner.hover:bg-transparent.cursor-pointer.btn-delete' + deleteClass, {
+	        onclick: function onclick() {
+	          _this2.ee.emit('deletetrack', _this2);
+	        }
+	      }, ['Delete'])]), (0, _h2.default)('label', [(0, _h2.default)('input.volume-slider', {
 	        attributes: {
 	          type: 'range',
 	          min: 0,

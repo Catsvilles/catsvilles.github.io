@@ -148,7 +148,7 @@
     </aside>
     <div class="flex-1">
       <main>
-        <div class="py-4">
+        <div class="py-4" style="width: 700px">
           <div id="playlist" class="neumorphism-shadow "></div>
           <div class="flex cursor-pointer mt-2 p-2 text-gray-200 neumorphism-shadow  editor-footer">
             <div class="btn-pause mr-2 rounded-l neumorphism-shadow neumorphism-inner hover:bg-transparent p-2">
@@ -185,12 +185,15 @@
               <div title="Fade Out" class="btn-fadeout mr-2 neumorphism-shadow neumorphism-inner hover:bg-transparent p-2">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </div>
-              <select class="mr-8 bg-transparent neumorphism-shadow mr-2 neumorphism-inner hover:bg-transparent" title="Envelope">
+              <select class="bg-transparent neumorphism-shadow mr-2 neumorphism-inner hover:bg-transparent" title="Envelope">
                 <option class="btn-logarithmic" value="volvo">Logarithmic</option>
                 <option value="saab">Linear</option>
                 <option value="opel">Exponential</option>
                 <option value="audi">S-Curve</option>
               </select>
+              <label title="AutoScroll" class="inline-flex items-center">
+                <input type="checkbox" class="form-checkbox text-red-600 mr-2 h-8 w-8 p-8" checked>
+              </label>
               <div title="Download" class="btn-download mr-2 neumorphism-shadow neumorphism-inner hover:bg-transparent p-2">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
               </div>
