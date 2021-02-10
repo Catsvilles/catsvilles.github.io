@@ -5986,15 +5986,15 @@ var WaveformPlaylist =
 	        attributes: {
 	          style: 'height: ' + numChan * data.height + 'px; width: ' + data.controls.width + 'px; position: absolute; left: 0; z-index: 10;'
 	        }
-	      }, [(0, _h2.default)('header.truncate', [this.name]), (0, _h2.default)('div.btn-group', [(0, _h2.default)('span.leading-none.rounded.py-1.px-2.neumorphism-shadow.neumorphism-inner.hover:bg-transparent.cursor-pointer.btn-mute' + muteClass, {
+	      }, [(0, _h2.default)('header.truncate', [this.name]), (0, _h2.default)('div.btn-group', [(0, _h2.default)('span.btn-control.btn-mute' + muteClass, {
 	        onclick: function onclick() {
 	          _this2.ee.emit('mute', _this2);
 	        }
-	      }, ['Mute']), (0, _h2.default)('span.leading-none.rounded.py-1.px-2.neumorphism-shadow.neumorphism-inner.hover:bg-transparent.cursor-pointer.btn-solo' + soloClass, {
+	      }, ['Mute']), (0, _h2.default)('span.btn-control.btn-solo' + soloClass, {
 	        onclick: function onclick() {
 	          _this2.ee.emit('solo', _this2);
 	        }
-				}, ['Solo']), (0, _h2.default)('span.leading-none.rounded.py-1.px-2.neumorphism-shadow.neumorphism-inner.hover:bg-transparent.cursor-pointer.btn-delete' + deleteClass, {
+				}, ['Solo']), (0, _h2.default)('span.btn-control.btn-delete' + deleteClass, {
 	        onclick: function onclick() {
 	          _this2.ee.emit('deletetrack', _this2);
 	        }

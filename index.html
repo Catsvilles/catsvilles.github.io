@@ -1,10 +1,325 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    In progress...
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="bs.css"> -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style media="screen">
+  .playlist .wp-fade { background-color: rgba(0, 0, 0, 0.4); }
+
+  .playlist .state-cursor, .playlist .state-select { cursor: text; }
+
+  .playlist .state-fadein { cursor: w-resize; }
+
+  .playlist .state-fadeout { cursor: e-resize; }
+
+  .playlist .state-shift { cursor: ew-resize; }
+
+  .playlist .playlist-time-scale { height: 30px; }
+
+  /* .playlist .playlist-tracks { background: #065f46; } */
+
+  .playlist .channel { background: #bdc3c7; }
+
+  .playlist .channel-progress { background: darkgray; }
+
+  .playlist .cursor { background: black; }
+
+  .playlist .wp-fade { background-color: rgba(0, 0, 0, 0.4); }
+
+  .playlist .state-cursor, .playlist .state-select { cursor: text; }
+
+  .playlist .state-fadein { cursor: w-resize; }
+
+  .playlist .state-fadeout { cursor: e-resize; }
+
+  .playlist .state-shift { cursor: ew-resize; }
+
+  .playlist .selection.point { background: blue; }
+
+  .playlist .selection.segment { background: rgba(0, 0, 0, 0.1); }
+
+  .playlist .channel-wrapper.silent .channel { opacity: 0.3; }
+
+  .playlist .controls { background-color: #515a63; text-align: center; }
+
+  .playlist .controls header { overflow: hidden; background: #bdc3c7; margin-bottom: 1em; }
+
+  .playlist .controls label { margin: 1em auto; width: 100%; display: inline-block; font: normal normal normal 14px/1 FontAwesome; font-size: inherit; text-rendering: auto; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; transform: translate(0, 0); }
+
+  /* .playlist .controls label:before { content: "\f027"; color: black; font-size: 18px; padding-right: 5px; -moz-osx-font-smoothing: grayscale; } */
+
+  /* .playlist .controls label:after { content: "\f028"; color: black; font-size: 18px; padding-left: 5px; } */
+
+  /* .editor-footer {
+    background: #bdc3c7;
+  } */
+  ::-webkit-scrollbar-track
+   {
+   	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+   	background-color: #F5F5F5;
+   }
+
+  ::-webkit-scrollbar
+   {
+   	width: 10px;
+   	background-color: #F5F5F5;
+   }
+
+  ::-webkit-scrollbar-thumb
+   {
+   	background-color: #333;
+   	border: 2px solid #555555;
+   }
+
+   .btn-control {
+    background-color: #bdc3c7;
+    padding: 3px 6px;
+    margin: 1px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    cursor: pointer;
+   }
+
+   .btn-control:hover {
+     background: transparent;
+     color: #fff;
+     border: 1px solid #fff;
+   }
+
+   .btn-footer {
+     border-color: #bdc3c7;
+   }
+
+   .btn-footer:hover {
+     background: #bdc3c7;
+   }
+
+   .neumorphism-shadow {
+     box-shadow: -4px -4px 10px rgb(255, 255, 255), 4px 4px 10px rgba(0, 0, 0, 0.219);
+   }
+
+   .dropdown:hover .dropdown-menu {
+     display: block;
+   }
+</style>
+<body class="text-gray-800 bg-gray-100">
+  <div class="container mx-auto my-2 p-2">
+    <div class="md:flex no-wrap md:-mx-2 ">
+      <!-- Left Side -->
+      <div class="h-full w-full bg-white neumorphism-shadow md:w-3/12 md:mx-2">
+        <div class="flex mt-2 items-center justify-center text-sm font-bold">
+          <div class="text-gray uppercase">Library</div>
+        </div>
+        <nav class="flex-1 max-h-full overflow-y-hidden">
+            <ul class="max-h-full p-2 space-y-1 overflow-y-auto divide-y divide-blue-300">
+              <li>
+                <a
+                  href="#"
+                  class="flex items-center px-2 py-2 text-gray-600 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
+                >
+                  <span class="font-medium">Track Title 1</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="flex items-center px-2 py-2 text-gray-600 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
+                >
+                  <span class="font-medium">Epic Song</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="flex items-center px-2 py-2 text-gray-600 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
+                >
+                  <span class="font-medium">Ambient Song</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="flex items-center px-2 py-2 text-gray-600 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
+                >
+                  <span class="font-medium">Another Track Title</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        <div class="relative">
+          <div class="track-drop flex items-center justify-center
+          mt-2 rounded-lg border-dashed border-2 border-light-gray-200
+          absolute inset-x-0 bottom-0 top-0 h-28 cursor-pointer font-extrabold
+          text-2xl bg-white hover:bg-gray-50">Drop Files Here</div>
+        </div>
+      </div>
+      <!-- Right Side -->
+      <div class="w-full bg-white p-2 neumorphism-shadow md:w-9/12 md:mx-2 h-full">
+        <div class="flex items-center mb-2 w-full editor-footer">
+          <div class="btn-pause group relative mr-1 rounded-l btn-footer cursor-pointer shadow border-2 rounded px-4 py-2 p-2">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+              Pause
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <i class="fas fa-pause"></i>
+          </div>
+          <div class="btn-play group relative mr-1 btn-footer cursor-pointer shadow border-2 rounded px-4 py-2 p-2">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+              Play
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <i class="fas fa-play"></i>
+          </div>
+          <div class="btn-stop group relative mr-4 btn-footer cursor-pointer shadow border-2 rounded px-4 py-2 p-2">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+              Stop
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <i class="fas fa-stop"></i>
+          </div>
+          <!-- Fade Controls -->
+          <div title="Switch to Cursor" class="btn-cursor group relative mr-1 btn-footer cursor-pointer shadow border-2 rounded px-4 py-2 p-2">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+              Switch to Cursor
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+          </div>
+          <div title="Shift Audio Tracks" class="btn-shift group relative mr-1 btn-footer cursor-pointer shadow border-2 rounded px-4 py-2 p-2">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+              Shift Tracks
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <i class="fas fa-arrows-alt-h"></i>
+          </div>
+          <div title="Fade In" class="btn-fadein group relative mr-1 btn-footer cursor-pointer shadow border-2 rounded px-4 py-2 p-2">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+              Fade In
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <svg class="w-4 h-4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+            <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+            <g><g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)"><path d="M9458.3,5042.1c-38.5-19.3-89.9-66.4-113.4-104.9c-42.8-68.5-42.8-102.7-42.8-4826.6c0-4706.8,0-4758.2,42.8-4826.6c85.6-139.1,286.8-175.5,426-74.9c141.3,98.4,132.7-265.4,126.3,4944.4l-6.4,4719.6l-47.1,66.4C9753.7,5065.6,9593.1,5108.4,9458.3,5042.1z"/><path d="M8317.4,4033.9c-40.7-21.4-96.3-70.6-122-111.3l-49.2-72.8V-390.3c0-4165.2,0-4242.3,42.8-4308.7c119.9-196.9,378.8-201.2,507.3-8.5l49.2,72.8v4229.5c0,3983.3-2.1,4233.8-38.5,4302.3C8632.1,4046.8,8458.7,4106.7,8317.4,4033.9z"/><path d="M7163.7,2876c-40.6-19.3-94.2-64.2-117.7-96.3l-44.9-59.9l-6.4-3643c-4.3-2525.7,0-3666.5,17.1-3722.2c40.7-141.3,211.9-237.6,357.5-199.1c32.1,6.4,94.2,49.2,139.1,94.2l81.3,83.5v3685.8c0,4116,15,3758.6-149.8,3850.6C7341.4,2925.2,7260.1,2927.3,7163.7,2876z"/><path d="M5990.8,1737.3c-38.5-21.4-85.6-72.8-107-111.3c-36.4-66.3-38.5-226.9-38.5-3163.5v-3092.9l49.2-77c130.6-211.9,438.8-181.9,526.6,51.4c32.1,81.3,34.2,385.3,30,3161.4c-6.4,2921.7-8.5,3075.8-44.9,3131.4C6316.2,1773.6,6125.6,1820.7,5990.8,1737.3z"/><path d="M4905.6,645.6c-32.1-10.7-79.2-36.4-102.7-57.8c-107-96.3-102.7,21.4-102.7-2686.2c0-2472.2,2.1-2534.2,42.8-2600.6c119.9-196.9,378.9-201.2,507.3-8.5l49.2,72.8V-2107c0,2859.6,15,2632.7-171.2,2726.9C5027.6,671.3,5001.9,673.5,4905.6,645.6z"/><path d="M3717.7-505.9c-40.7-19.3-94.2-64.2-117.7-96.3c-45-59.9-45-77.1-51.4-2012c-4.3-1337.8,0-1977.8,17.1-2031.3c40.7-141.3,211.9-237.6,357.5-199.1c32.1,6.4,94.2,49.2,139.1,94.2l81.3,83.5V-2672c0,1964.9,0,1997-42.8,2065.5C4021.6-478.1,3856.8-433.1,3717.7-505.9z"/><path d="M2536.2-1651c-143.4-96.3-137-27.8-137-1577.5c0-1363.5,2.1-1404.1,42.8-1474.8c128.4-216.2,445.2-188.3,535.1,47.1c30,79.2,32.1,241.9,27.8,1470.5c-6.4,1290.7-8.6,1387-44.9,1440.5C2867.9-1601.8,2671-1559,2536.2-1651z"/><path d="M1453.1-2738.4c-72.8-21.4-171.2-122-188.4-196.9c-6.4-25.7-8.6-430.2-6.4-896.8l6.4-849.8l62.1-64.2c115.6-119.9,286.8-137,408.8-40.7c113.4,89.9,117.7,117.7,117.7,1006c0,937.5,0,931.1-171.2,1018.8C1579.4-2710.5,1555.9-2708.4,1453.1-2738.4z"/><path d="M271.6-3887.8c-137-68.5-162.7-126.3-169.1-404.6c-8.6-297.5,2.1-370.3,72.8-455.9c113.4-134.8,318.9-134.8,447.3,0c64.2,66.3,64.2,66.3,70.6,370.3c8.6,348.9-8.6,406.7-145.5,483.8C449.3-3838.5,367.9-3836.4,271.6-3887.8z"/></g></g>
+            </svg>              </div>
+          <div title="Fade Out" class="btn-fadeout group relative mr-1 btn-footer cursor-pointer shadow border-2 rounded px-4 py-2 p-2">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+              Fade Out
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <svg class="w-4 h-4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+            <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+            <g><g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)"><path d="M264.9,5043.2c-38.6-19.3-92.1-64.3-117.8-100.7l-47.1-66.4V110v-4766.1l51.4-72.8c55.7-75,158.5-130.7,248.5-130.7c83.5,0,209.9,72.8,250.6,145.7c36.4,60,38.6,329.9,38.6,4824s-2.1,4764-36.4,4824c-45,75-171.4,145.7-257.1,145.7C363.5,5079.6,303.5,5062.5,264.9,5043.2z"/><path d="M1417.4,4036.4c-40.7-21.4-96.4-70.7-122.1-111.4l-49.3-72.8V-391.3c0-4168.5,0-4245.6,42.8-4312c120-197.1,379.2-201.3,507.7-8.6l49.3,72.8v4243.5c0,4168.5,0,4245.6-42.8,4312C1719.4,4055.7,1552.3,4107.1,1417.4,4036.4z"/><path d="M2550.5,2871.1c-160.7-96.4-147.8,259.2-147.8-3853.6v-3688.7l81.4-83.5c92.1-90,162.8-115.7,269.9-96.4c94.2,17.1,169.2,79.2,214.2,171.4c32.1,66.4,34.3,396.3,34.3,3712.2c0,3420.9-2.1,3641.5-38.6,3710.1C2884.7,2899,2696.2,2959,2550.5,2871.1z"/><path d="M3685.8,1731.6c-40.7-25.7-90-81.4-109.2-122.1c-36.4-70.7-38.6-263.5-38.6-3131.7c0-3371.6-8.6-3176.7,130.7-3275.2c139.2-98.5,340.6-62.1,426.3,77.1c42.8,68.5,42.8,115.7,42.8,3183.1c0,3050.3,0,3116.7-42.8,3183.1C4013.6,1783,3820.8,1823.7,3685.8,1731.6z"/><path d="M4866.1,619.8c-186.4-94.2-171.4,132.8-171.4-2726.9c0-2467.7,2.1-2529.8,42.8-2596.2c120-197.1,379.2-201.3,507.7-8.6l49.3,72.8v2540.5c0,2480.5-2.1,2542.6-42.8,2609C5166,654.1,5016.1,696.9,4866.1,619.8z"/><path d="M6007.8-502.6c-38.6-19.3-90-66.4-113.5-105c-42.8-68.5-42.8-105-42.8-2067.1v-1996.4l81.4-83.5c45-45,107.1-87.8,139.2-94.3c81.4-21.4,192.8,4.3,261.3,57.8c122.1,96.4,117.8,21.4,117.8,2131.4c0,1810-2.1,1949.3-38.5,2017.8c-19.3,40.7-62.1,92.1-92.1,115.7C6241.3-468.4,6093.5-457.6,6007.8-502.6z"/><path d="M7168.8-1625.1c-57.8-23.6-130.7-105-158.5-177.8c-15-40.7-23.6-509.8-23.6-1418.1c0-1201.7,4.3-1368.8,34.3-1445.9c90-224.9,398.4-254.9,524.8-51.4c42.8,70.7,42.8,90,45,1484.5c0,1561.6,4.3,1499.4-139.2,1587.3C7380.9-1601.5,7246-1592.9,7168.8-1625.1z"/><path d="M8368.4-2732.5c-77.1-21.4-165-96.4-194.9-169.2c-23.6-57.8-30-242.1-30-901.8c0-786.2,2.1-835.4,42.8-899.7c120-197.1,379.2-201.3,507.7-8.6c49.3,72.8,49.3,75,49.3,921.1c0,803.3-2.1,852.5-42.8,916.8c-21.4,38.6-62.1,83.5-90,100.7C8552.6-2736.8,8430.5-2715.4,8368.4-2732.5z"/><path d="M9456.6-3887.1c-134.9-68.5-156.4-137.1-156.4-479.8v-304.2l81.4-83.5c45-45,107.1-87.8,139.2-94.3c81.4-21.4,192.8,4.3,261.3,57.8c94.3,75,117.8,160.7,117.8,439.1s-25.7,364.2-130.7,441.3C9690.1-3852.8,9542.3-3842.1,9456.6-3887.1z"/></g></g>
+            </svg>
+          </div>
+          <div class="dropdown inline-block cursor-pointer relative">
+            <div class="mr-1 btn-footer cursor-pointer shadow border-2 rounded px-4 py-1 inline-flex items-center">
+              <span class="mr-1">Envelope</span>
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
+            </div>
+            <ul class="dropdown-menu hidden absolute z-50 ml-0 pt-1 bg-gray-100">
+              <span class="btn-logarithmic rounded-t py-2 px-4 block whitespace-no-wrap hover:bg-white">Logarithmic </span>
+              <span class="btn-linear rounded-t py-2 px-4 block whitespace-no-wrap hover:bg-white">Linear</span>
+              <span class="btn-exponential rounded-t py-2 px-4 block whitespace-no-wrap hover:bg-white">Exponential </span>
+              <span class="btn-scurve rounded-t py-2 px-4 block whitespace-no-wrap hover:bg-white">S-Curve </span>
+            </ul>
+          </div>
+        </div>
+        <div id="playlist"></div>
+        <div class="flex items-center mt-2 w-full editor-footer">
+          <!-- Scale controls -->
+          <div class="btn-zoom-in group relative mr-1 btn-footer cursor-pointer shadow border-2 rounded px-4 py-2">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+              Zoom In
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+          </div>
+          <div class="btn-zoom-out group relative mr-1 btn-footer cursor-pointer shadow border-2 rounded px-4 py-2 p-2">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+              Zoom Out
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7"></path></svg>
+          </div>
+          <label title="AutoScroll" class="group relative inline-flex items-center">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+              Auto Scrolling
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <input type="checkbox" class="automatic-scroll form-checkbox text-red-600 mr-2 h-8 w-8 p-8" checked>
+          </label>
+          <div title="Download" class="btn-download btn-footer cursor-pointer group relative shadow border-2 rounded px-4 py-2">
+            <div style="background:#bdc3c7;" class="whitespace-nowrap	w-24 opacity-0 text-xs rounded py-1 right-0 absolute z-10 group-hover:opacity-100 bottom-10 -left-full ml-12 px-2 pointer-events-none">
+            Download Mix
+              <svg style="color:#bdc3c7;"class="absolute h-2 left-0 ml-3 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+            </div>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/waveform-playlist.var.js"></script>
+<script type="text/javascript">
+  const playlist = WaveformPlaylist.init({
+    samplesPerPixel: 3000,
+    waveHeight: 100,
+    container: document.getElementById("playlist"),
+    state: 'cursor',
+    colors: {
+      waveOutlineColor: '#4b5563',
+      timeColor: '#f2f2f2',
+      fadeColor: 'white'
+    },
+    timescale: true,
+    controls: {
+      show: true, //whether or not to include the track controls
+      width: 150 //width of controls in pixels
+    },
+    seekStyle : 'line',
+    zoomLevels: [500, 1000, 3000, 5000]
+  });
+
+  playlist.load([
+    {
+      "src": "media/audio/1.mp3",
+      "name": "Some Long Title",
+    },
+    {
+      "src": "media/audio/Longer Title Check.mp3",
+      "name": "Another Test",
+      "start": 22,
+      "gain": 0.4,
+      "fadeIn": {
+        "duration": 4
+      },
+    },
+    {
+      "src": "media/audio/Soem Title.mp3",
+      "name": "Last Title Test",
+      "start": 44,
+      "gain": 0.6,
+      "cueout": 64,
+      "fadeOut": {
+        "duration": 2
+      },
+    },
+    {
+      "src": "media/audio/2.mp3",
+      "name": "Test",
+    },
+  ]).then(function() {
+    //initialize the WAV exporter.
+    playlist.initExporter();
+  });
+</script>
+<script type="text/javascript" src="js/emitter.js"></script>
+</body>
 </html>
