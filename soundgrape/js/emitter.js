@@ -8,7 +8,7 @@ var $timeFormat = $container.find('.time-format');
 var $audioStart = $container.find('.audio-start');
 var $audioEnd = $container.find('.audio-end');
 var $time = $container.find('.audio-pos');
-
+console.log(playlist);
 var format = "hh:mm:ss.uuu";
 var startTime = 0;
 var endTime = 0;
@@ -323,6 +323,7 @@ ee.on("select", updateSelect);
 ee.on("timeupdate", updateTime);
 
 ee.on("mute", function(track) {
+  console.log(track);
   displaySoundStatus("Mute button pressed for " + track.name);
 });
 
