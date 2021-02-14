@@ -115,9 +115,33 @@ updateTime(audioPos);
 //   }
 // });
 
-$container.on("click", ".btn-annotations-download", function() {
-  ee.emit("annotationsrequest");
-});
+  $('.library-nav :checkbox').change(function() {
+    if (this.checked) {
+      var name = $(this).data("name") || "Library Track";
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', $(this).data("src"), true);
+      xhr.responseType = 'arraybuffer';
+
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          var audioData = xhr.response;
+          playlist.load([{
+            src: new Blob([audioData], { type: 'audio/ogg; codecs=opus' }),
+            name: name,
+          }]);
+        }
+      };
+
+      xhr.send();
+    } else {
+      var track = playlist.tracks.find(obj => {
+      	return obj.name === $(this).data("name")
+      });
+      if (track.name === $(this).data("name")) {
+        ee.emit("deletetrack", track)
+      }
+    }
+  });
 
 $container.on("click", ".btn-loop", function() {
   isLooping = true;
@@ -323,7 +347,6 @@ ee.on("select", updateSelect);
 ee.on("timeupdate", updateTime);
 
 ee.on("mute", function(track) {
-  console.log(track);
   displaySoundStatus("Mute button pressed for " + track.name);
 });
 

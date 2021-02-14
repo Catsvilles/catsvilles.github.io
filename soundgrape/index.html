@@ -27,7 +27,7 @@
 
   .playlist .channel { background: #2390a9; }
 
-  .playlist .channel-progress { background: #515a63; }
+  /* .playlist .channel-progress { background: #515a63; } */
 
   .playlist .cursor { background: black; }
 
@@ -172,39 +172,60 @@
           <div class="uppercase">Library</div>
         </div>
         <nav class="flex-1 max-h-full overflow-y-hidden">
-            <ul class="max-h-full p-2 space-y-1 overflow-y-auto divide-y divide-blue-300">
-              <li>
-                <a
-                  href="#"
-                  class="flex items-center px-2 py-2 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
+            <ul class="library-nav max-h-full p-2 space-y-1 overflow-y-auto divide-y divide-blue-300">
+              <li class="library-nav-link">
+                <div
+                  class="flex justify-between items-center px-2 py-2 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
                 >
                   <span class="font-medium">Track Title 1</span>
-                </a>
+                  <label class="custom-label rounded">
+                      <div class="bg-gray-700 btn-footer cursor-pointer shadow w-8 h-8 flex justify-center items-center mr-1">
+                      <input data-src="media/audio/1.mp3" data-name="From Lib" type="checkbox" class="hidden">
+                      <svg class="hidden w-6 h-6 text-gray-200 pointer-events-none" viewBox="0 0 172 172"><g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/></g></svg>
+                      </div>
+                  </label>
+                </div>
               </li>
-              <li>
-                <a
-                  href="#"
-                  class="flex items-center px-2 py-2 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
+              <li class="library-nav-link">
+                <div
+                  class="flex justify-between items-center px-2 py-2 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
                 >
-                  <span class="font-medium">Epic Song</span>
-                </a>
+                  <span class="font-medium">Track Title 1222</span>
+                  <label class="custom-label rounded">
+                      <div class="bg-gray-700 btn-footer cursor-pointer shadow w-8 h-8 flex justify-center items-center mr-1">
+                      <input data-src="media/audio/2.mp3" data-name="From 222Lib" type="checkbox" class="hidden">
+                      <svg class="hidden w-6 h-6 text-gray-200 pointer-events-none" viewBox="0 0 172 172"><g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/></g></svg>
+                      </div>
+                  </label>
+                </div>
               </li>
-              <li>
-                <a
-                  href="#"
-                  class="flex items-center px-2 py-2 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
+              <li class="library-nav-link">
+                <div
+                  class="flex justify-between items-center px-2 py-2 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
                 >
-                  <span class="font-medium">Ambient Song</span>
-                </a>
+                  <span class="font-medium">Track Title 33</span>
+                  <label class="custom-label rounded">
+                      <div class="bg-gray-700 btn-footer cursor-pointer shadow w-8 h-8 flex justify-center items-center mr-1">
+                      <input data-src="media/audio/Longer Title Check.mp3" data-name="333" type="checkbox" class="hidden">
+                      <svg class="hidden w-6 h-6 text-gray-200 pointer-events-none" viewBox="0 0 172 172"><g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/></g></svg>
+                      </div>
+                  </label>
+                </div>
               </li>
-              <li>
-                <a
-                  href="#"
-                  class="flex items-center px-2 py-2 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
+              <li class="library-nav-link">
+                <div
+                  class="flex justify-between items-center px-2 py-2 transition-transform transform rounded-md hover:translate-x-1 focus:ring focus:outline-none"
                 >
-                  <span class="font-medium">Another Track Title</span>
-                </a>
+                  <span class="font-medium">Track Title 44</span>
+                  <label class="custom-label rounded">
+                      <div class="bg-gray-700 btn-footer cursor-pointer shadow w-8 h-8 flex justify-center items-center mr-1">
+                      <input data-src="media/audio/Soem Title.mp3" data-name="From DSDD" type="checkbox" class="hidden">
+                      <svg class="hidden w-6 h-6 text-gray-200 pointer-events-none" viewBox="0 0 172 172"><g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/></g></svg>
+                      </div>
+                  </label>
+                </div>
               </li>
+
             </ul>
           </nav>
         <div class="relative">
@@ -378,9 +399,11 @@
     //initialize the WAV exporter.
     playlist.initExporter();
   });
+$( document ).ready(function() {
   $('.editor-footer').on('click', '.cursor-btn', function() {
     $(this).addClass('cursor-btn-selected').siblings().removeClass('cursor-btn-selected');
   });
+});
 </script>
 <script type="text/javascript" src="js/emitter.js"></script>
 </body>
